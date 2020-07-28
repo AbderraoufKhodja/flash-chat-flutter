@@ -11,6 +11,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String password;
+  String email;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,8 +35,11 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 48.0,
             ),
             TextField(
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
               onChanged: (value) {
                 //Do something with the user input.
+                email = value;
               },
               decoration:
                   kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
@@ -42,8 +48,11 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 8.0,
             ),
             TextField(
+              textAlign: TextAlign.center,
+              obscureText: true,
               onChanged: (value) {
                 //Do something with the user input.
+                password = value;
               },
               decoration:
                   kTextFieldDecoration.copyWith(hintText: 'Enter a password'),
@@ -55,7 +64,8 @@ class _LoginScreenState extends State<LoginScreen> {
               fillColor: Colors.lightBlueAccent,
               onPressed: () {
                 //Go to login screen.
-                Navigator.pushNamed(context, LoginScreen.id);
+                print('email: $email');
+                print('password: $password');
               },
               title: 'Log In',
             ),
