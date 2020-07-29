@@ -69,12 +69,14 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               onPressed: () async {
                 //Go to registration screen.
                 try {
-                  final newUser = await _auth.createUserWithEmailAndPassword(
+                  final newUser = await _auth.signInWithEmailAndPassword(
                       email: email, password: password);
-                  if (newUser == null)
+                  if (newUser != null)
                     Navigator.pushNamed(context, ChatScreen.id);
+                  print(widget);
+                  print('email: $email');
+                  print('password: $password');
                 } catch (e) {
-//                  print(widget);
                   print(e);
                 }
               },

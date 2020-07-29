@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/components/pill_button.dart';
+import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -65,10 +66,19 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             PillButton(
               fillColor: Colors.lightBlueAccent,
-              onPressed: () {
+              onPressed: () async {
                 //Go to login screen.
-                print('email: $email');
-                print('password: $password');
+                try {
+                  final newUser = await _auth.createUserWithEmailAndPassword(
+                      email: email, password: password);
+                  if (newUser != null)
+                    Navigator.pushNamed(context, ChatScreen.id);
+                  print(widget);
+                  print('email: $email');
+                  print('password: $password');
+                } catch (e) {
+                  print(e);
+                }
               },
               title: 'Log In',
             ),
