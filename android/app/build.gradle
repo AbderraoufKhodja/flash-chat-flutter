@@ -23,6 +23,7 @@ if (flutterVersionName == null) {
 }
 
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 
 android {
@@ -59,6 +60,7 @@ dependencies {
     // add SDKs for desired Firebase products
     // https://firebase.google.com/docs/android/setup#available-libraries
     implementation 'androidx.multidex:multidex:2.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.3.2'
+
 }
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+

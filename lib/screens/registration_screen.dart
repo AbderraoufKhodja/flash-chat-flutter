@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/components/pill_button.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import 'chat_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static String id = 'RegistrationScreen';
@@ -11,6 +13,7 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
   String password;
   String email;
 
@@ -62,12 +65,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             ),
             PillButton(
               fillColor: Colors.blueAccent,
-              onPressed: () {
-                //Go to registration screen.
-                print('email: $email');
-                print('password: $password');
-              },
               title: 'Register',
+              onPressed: () async {
+                //Go to registration screen.
+                try {
+                  final newUser = await _auth.createUserWithEmailAndPassword(
+                      email: email, password: password);
+                  if (newUser == null)
+                    Navigator.pushNamed(context, ChatScreen.id);
+                } catch (e) {
+//                  print(widget);
+                  print(e);
+                }
+              },
             ),
           ],
         ),
